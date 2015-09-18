@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:view="dev.div0.app.intro.view.*" 
+			   xmlns:local="*"
+			   xmlns:view1="dev.div0.app.main.view.*"
+			   applicationDPI="160"
+			   addedToStage="application1_addedToStageHandler(event)"
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   currentState="{pm.currentState}">
+	
+	<fx:Declarations>
+		<local:AppBeansImports/>
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="intro"/>
+		<s:State name="main"/>
+	</s:states>
+	
+	<fx:Script>
+		<![CDATA[
+			import dev.div0.app.pm.AppViewPM;
+			import dev.div0.iocContainer.IocContainer;
+			
+			import mx.events.FlexEvent;
+			
+			private var iocContainer:IocContainer = IocContainer.getInstance();
+			
+			[Bindable]
+			public var pm:AppViewPM;
+
+			private function application1_addedToStageHandler(event:Event):void
+			{
+				iocContainer.registerView(this);
+			}
+			
+			private function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				iocContainer.init("config.xml");
+			}
+		]]>
+	</fx:Script>
+	
+	<view:IntroView includeIn="intro"/>
+	<view1:MainView includeIn="main"/>
+</s:Application>

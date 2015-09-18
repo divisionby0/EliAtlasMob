@@ -1,0 +1,60 @@
+<config>
+	<!-- FIRST non injectable objects, SECOND: objects with dependencies, THIRD: views -->
+	
+	<!-- сейчас бины инстанциируются (onPostConstruct) начиная с последнего до первого 
+	соответственно, для того чтобы подписаться под то или иное событие бине ДО ТОГО как
+	оно было разослано я использую ПОКА ЧТО очередность.
+	То есть, чтобы услышать событие из бина 1 в бине 2, нужно тут добавлять бины в последовательности: bean1, bean2
+	-->
+	
+	<!-- SERVICES -->
+	<service id="fakeService">
+		<classAlias>dev.div0.app.services.FakeService</classAlias>
+	</service>
+	
+	<!-- MODELS -->
+	<bean id="appModel">
+		<classAlias>dev.div0.app.model.AppModel</classAlias>
+		<injects>
+			<instance id="fakeService" property="service"/>
+		</injects>
+	</bean>
+	
+	<!-- PM -->
+	<bean id="appViewPM">
+		<classAlias>dev.div0.app.pm.AppViewPM</classAlias>
+	</bean>
+	<bean id="introViewPM">
+		<classAlias>dev.div0.app.intro.pm.IntroViewPM</classAlias>
+	</bean>
+	<bean id="mainViewPM">
+		<classAlias>dev.div0.app.main.pm.MainViewPM</classAlias>
+	</bean>
+	
+	<!-- CONTROLLERS -->
+	<bean id="appController">
+		<classAlias>dev.div0.app.AppController</classAlias>
+		<injects>
+			<instance id="appModel" property="model"/>
+			<instance id="appViewPM" property="appPM"/>
+		</injects>
+	</bean>
+	
+	<views>
+		<view classAlias="EliAtlasMob">
+			<injects>
+				<instance id="appViewPM" property="pm"/>
+			</injects>
+		</view>
+		<view classAlias="dev.div0.app.intro.view.IntroView">
+			<injects>
+				<instance id="introViewPM" property="pm"/>
+			</injects>
+		</view>
+		<view classAlias="dev.div0.app.main.view.MainView">
+			<injects>
+				<instance id="mainViewPM" property="pm"/>
+			</injects>
+		</view>
+	</views>
+</config>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="MainView"
+		addedToStage="view1_addedToStageHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import dev.div0.app.main.pm.MainViewPM;
+			import dev.div0.iocContainer.IocContainer;
+			
+			private var iocContainer:IocContainer = IocContainer.getInstance();
+			
+			public var pm:MainViewPM;
+			
+			private function view1_addedToStageHandler(event:Event):void
+			{
+				iocContainer.registerView(this);
+			}
+			
+			private function goToIntroButton_clickHandler(event:MouseEvent):void
+			{
+				pm.goToIntroButtonClick();
+			}
+			
+			private function saveDataButton_clickHandler(event:MouseEvent):void
+			{
+				pm.saveDataButtonClick();
+			}
+		]]>
+	</fx:Script>
+	
+	<s:VGroup>
+		<s:Button label="Go to intro" id="goToIntroButton" click="goToIntroButton_clickHandler(event)"/>
+		<s:Button label="Save data" id="saveDataButton" click="saveDataButton_clickHandler(event)"/>
+	</s:VGroup>
+	
+</s:View>
