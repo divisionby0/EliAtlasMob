@@ -18,7 +18,7 @@ package dev.div0.app
 		{
 			appPM.currentState = AppViewPM.INTRO;
 			GlobalDispatcher.getInstance().addEventListener(IntroViewEvent.GO_TO_MAIN_REQUEST, goToMainRequestHandler);
-			GlobalDispatcher.getInstance().addEventListener(MainViewEvent.GO_TO_INTRO_CLICKED, goToIntroRequestHandler);
+			GlobalDispatcher.getInstance().addEventListener(MainViewEvent.GO_INTRO_REQUEST, goToIntroRequestHandler);
 			GlobalDispatcher.getInstance().addEventListener(MainViewEvent.SAVE_DATA_REQUEST, saveDataRequestHandler);
 		}
 		

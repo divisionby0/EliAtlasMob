@@ -7,7 +7,7 @@ package dev.div0.app.main.pm
 	{
 		public function goToIntroButtonClick():void
 		{
-			GlobalDispatcher.getInstance().dispatchEvent(new MainViewEvent(MainViewEvent.GO_TO_INTRO_CLICKED));
+			GlobalDispatcher.getInstance().dispatchEvent(new MainViewEvent(MainViewEvent.GO_INTRO_REQUEST));
 		}
 		public function saveDataButtonClick():void
 		{
